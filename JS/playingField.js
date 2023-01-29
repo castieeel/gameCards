@@ -7,7 +7,6 @@ function renderPlayingFieldBlock(container) {
 window.application.blocks['play-level'] = renderPlayingFieldBlock;
 
 
-
 function renderPlayScreen() {
     const divMain = document.createElement('div');
     window.application.renderBlock('play-level', divMain);

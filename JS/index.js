@@ -1,4 +1,5 @@
 const APP = document.querySelector('.app');
+
 window.application = {
     blocks: {},
     screens: {},

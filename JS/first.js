@@ -43,7 +43,6 @@ function renderFirstScreenBlock(container) {
 window.application.blocks['level-list'] = renderFirstScreenBlock;
 
 
-
 function renderFirstScreen() {
     const divMain = document.createElement('div');
     divMain.classList.add('main');
@@ -52,7 +51,6 @@ function renderFirstScreen() {
 }
 window.application.screens['first'] = renderFirstScreen;
 window.application.renderScreen('first');
-
 
 
 function handleButtonClick(level) {
