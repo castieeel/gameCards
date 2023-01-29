@@ -5,7 +5,6 @@ window.application = {
     timers: [],
     difficultyLevel: Number,
     renderScreen: function (screenName) {
-        //очистка экрана
         if (window.application.screens[screenName]) {
             APP.innerHTML = '';
             window.application.screens[screenName]();
