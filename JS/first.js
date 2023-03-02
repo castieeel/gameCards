@@ -20,9 +20,8 @@ function renderFirstScreenBlock(container) {
     const btnThree = document.createElement('button');
     btnThree.textContent = 3;
     btnThree.classList.add('box');
-    btnThree.addEventListener('click', () => {
-        handleButtonClick(3);
-    });
+    // btnThree.addEventListener('click', () => {
+    // });
 
     const btnStart = document.createElement('button');
     btnStart.textContent = 'Старт';
@@ -42,7 +41,6 @@ function renderFirstScreenBlock(container) {
 }
 window.application.blocks['level-list'] = renderFirstScreenBlock;
 
-
 function renderFirstScreen() {
     const divMain = document.createElement('div');
     divMain.classList.add('main');
@@ -51,7 +49,6 @@ function renderFirstScreen() {
 }
 window.application.screens['first'] = renderFirstScreen;
 window.application.renderScreen('first');
-
 
 function handleButtonClick(level) {
     const levelGame = level;

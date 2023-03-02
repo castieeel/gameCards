@@ -19,5 +19,5 @@ window.application = {
         } else {
             console.warn(`Блока ${blockName} не существует`);
         }
-    }
-}
+    },
+};
