@@ -4,9 +4,14 @@
         "es6": true,
         "node": true
     },
+
+    "globals": {
+        "APP": "writable",
+        "containerCards": "writable"
+    },
     "extends": ["eslint:recommended", "prettier"],
     "plugins": ["prettier"],
-    "parseOptions": {
+    "parserOptions": {
         "ecmaVersion": 2020
     },
     "rules": {}
