@@ -20,8 +20,9 @@ function renderFirstScreenBlock(container) {
     const btnThree = document.createElement('button');
     btnThree.textContent = 3;
     btnThree.classList.add('box');
-    // btnThree.addEventListener('click', () => {
-    // });
+    btnThree.addEventListener('click', () => {
+        handleButtonClick(3);
+    });
 
     const btnStart = document.createElement('button');
     btnStart.textContent = 'Старт';

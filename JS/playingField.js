@@ -5,8 +5,8 @@ function renderPlayingFieldBlock(container) {
     const div_min_sec = document.createElement('div');
     div_min_sec.classList.add('min-sec');
 
-    const min = document.createElement('p', (textContent = 'min'));
-    const sec = document.createElement('p', (textContent = 'sec'));
+    const min = document.createElement('p');
+    const sec = document.createElement('p');
     min.textContent = 'min';
     sec.textContent = 'sec';
 
@@ -17,9 +17,6 @@ function renderPlayingFieldBlock(container) {
     const btnRepeat = document.createElement('button');
     btnRepeat.textContent = 'Начать заново';
     btnRepeat.classList.add('btn-start');
-    btnRepeat.addEventListener('click', () => {
-        handleButtonClick(3);
-    });
 
     div_min_sec.appendChild(min);
     div_min_sec.appendChild(sec);
