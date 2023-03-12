@@ -9,7 +9,7 @@
         "format": "prettier --write ./js/",
         "lint:js": "eslint ./js/",
         "prepare": "husky install",
-        "lint:css": "stylelint '**/*.css'",
+        "lint:css": "stylelint ./**/*.css",
         "lint": "npm run lint:js && npm run lint:css"
     },
     "repository": {
