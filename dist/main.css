@@ -1,3 +1,6 @@
+/*!*************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./style.css ***!
+  \*************************************************************/
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +9,7 @@
 @font-face {
     font-family: StratosSkyeng;
     font-style: normal;
-    src: url('/fonts/stratosskyengweb-regular.woff2') format('woff2');
+    src: url(ce93393e831d32412096.woff2) format('woff2');
 }
 
 body {
@@ -113,3 +116,6 @@ body {
     height: 133px;
     border-radius: 4px;
 }
+
+
+/*# sourceMappingURL=main.css.map*/

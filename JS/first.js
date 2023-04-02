@@ -32,13 +32,12 @@ function renderFirstScreenBlock(container) {
     divContainer.classList.add('container');
     container.appendChild(divContainer);
     divContainer.appendChild(title);
+
     const divNum = document.createElement('div');
-    divNum.classList.add('box-num');
-    divNum.appendChild(btnOne);
-    divNum.appendChild(btnTwo);
-    divNum.appendChild(btnThree);
-    divContainer.appendChild(divNum);
-    divContainer.appendChild(btnStart);
+    divNum.classList.add('box-level');
+    divNum.append(btnOne, btnTwo, btnThree);
+
+    divContainer.append(divNum, btnStart);
 }
 window.application.blocks['level-list'] = renderFirstScreenBlock;
 
