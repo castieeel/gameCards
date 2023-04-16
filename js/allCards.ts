@@ -1,4 +1,6 @@
-export const createPngArray = (level) => {
+export const createPngArray = (
+    level: number
+): Array<{ img: string; id: number }> => {
     const cardsPng = [
         { img: '../static/pic_0.jpg', id: 0 },
         { img: '../static/pic_1.jpg', id: 1 },
@@ -46,14 +48,18 @@ export const createPngArray = (level) => {
         case 3:
             return cardsPng.slice(0, 18);
         default:
-            break;
+            return [];
     }
 };
 
-export const duplicateArray = (array) =>
-    array.reduce((res, current) => res.concat([current, current]), []);
+export const duplicateArray = <T>(array: T[]): T[] => [...array, ...array];
+// export const duplicateArray = (array:number[]) =>
+//     array.reduce(
+//         (res: number[], current:number) => res.concat([current, current]),
+//         []
+//     );
 
-export const shuffle = (array) => {
+export const shuffle = <T>(array: T[]): T[] => {
     let currentIndex = array.length,
         randomIndex;
 
