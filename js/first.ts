@@ -51,7 +51,7 @@ function renderFirstScreen() {
 window.application.screens['first'] = renderFirstScreen;
 window.application.renderScreen('first');
 
-function handleButtonClick(level: number) {
+export function handleButtonClick(level: number) {
     const levelGame: number = level;
     window.application.difficultyLevel = levelGame;
     window.application.renderScreen('playing-field');

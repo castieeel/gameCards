@@ -1,5 +1,17 @@
 import { createPngArray, duplicateArray, shuffle } from './allCards';
 import { APP } from './appMain';
+import { handleButtonClick } from './first';
+
+const timeMin = document.createElement('p');
+const timeSec = document.createElement('p');
+const modal = document.createElement('div');
+const btnRestart = document.createElement('button');
+const btnRestartModal = document.createElement('button');
+
+let secT: number;
+let minT: number;
+let timerId: NodeJS.Timeout | number;
+
 function renderPlayingFieldBlock(container: HTMLElement) {
     const divTop = document.createElement('div');
     divTop.classList.add('top-container');
@@ -7,25 +19,31 @@ function renderPlayingFieldBlock(container: HTMLElement) {
     const div_min_sec = document.createElement('div');
     div_min_sec.classList.add('min-sec');
 
+    modal.classList.add('modal');
+    modal.style.display = 'none';
+
     const min = document.createElement('p');
     const sec = document.createElement('p');
     min.textContent = 'min';
     sec.textContent = 'sec';
 
-    const time = document.createElement('p');
-    time.classList.add('time');
-    time.textContent = '00.00';
+    const divTimeGame = document.createElement('div');
+    divTimeGame.classList.add('time');
+    const timePoint = document.createElement('p');
+    timePoint.textContent = '.';
+    timeMin.textContent = '00';
+    timeSec.textContent = '00';
+    divTimeGame.append(timeMin, timePoint, timeSec);
 
-    const btnRestart = document.createElement('button');
     btnRestart.textContent = 'Начать заново';
     btnRestart.classList.add('btn-start');
 
     div_min_sec.append(min, sec);
-    divTextLeft.append(div_min_sec, time);
+    divTextLeft.append(div_min_sec, divTimeGame);
     divTop.append(divTextLeft, btnRestart);
 
-    const level = window.application.difficultyLevel;
     const gameTable = document.createElement('div');
+    const level = window.application.difficultyLevel;
     switch (level) {
         case 1:
             gameTable.classList.add('game-table-6');
@@ -65,6 +83,7 @@ window.application.blocks['play-level'] = renderPlayingFieldBlock;
 
 function renderPlayScreen() {
     const divMain = document.createElement('div');
+    divMain.append(modal);
     window.application.renderBlock('play-level', divMain);
     if (APP) APP.appendChild(divMain);
     startGame();
@@ -84,10 +103,13 @@ function startGame() {
         card.classList.add('flip');
     });
 
+    secT = 0;
+    minT = 0;
     setTimeout(() => {
         cards.forEach((card) => {
             card.classList.remove('flip');
         });
+        addTimer();
     }, 5000);
 
     cards.forEach((card: HTMLElement, index: number) =>
@@ -95,8 +117,6 @@ function startGame() {
             if (clickable == true && !card.classList.contains('successfully')) {
                 card.classList.add('flip');
                 const idCard = Number(card.children.item(0)?.id);
-
-                //card.firstChild?.id
 
                 if (firstCard == null) {
                     firstCard = index;
@@ -130,6 +150,9 @@ function startGame() {
                                 cards[firstCard].classList.remove('flip');
                             if (secondCard)
                                 cards[secondCard].classList.remove('flip');
+                            if (secondCard === 0) {
+                                cards[secondCard].classList.remove('flip');
+                            }
                             if (firstCard)
                                 cards[firstCard].classList.remove(
                                     'successfully'
@@ -151,10 +174,85 @@ function startGame() {
                             card.className.includes('flip')
                         )
                     ) {
-                        alert('Вы победили!');
+                        modalView(true, minT, secT);
                     }
                 }
             }
         })
     );
 }
+
+function tick() {
+    secT++;
+    if (secT >= 60) {
+        secT = 0;
+        minT++;
+    }
+}
+
+function addTimer() {
+    tick();
+    timeMin.textContent = String(minT > 9 ? minT : '0' + minT);
+    timeSec.textContent = String(secT > 9 ? secT : '0' + secT);
+
+    switch (window.application.difficultyLevel) {
+        case 1:
+            minT == 1 ? modalView(false, minT, secT) : timer();
+            break;
+        case 2:
+            minT == 2 ? modalView(false, minT, secT) : timer();
+            break;
+        case 3:
+            minT == 3 ? modalView(false, minT, secT) : timer();
+            break;
+    }
+}
+
+function timer() {
+    timerId = setTimeout(addTimer, 1000);
+}
+
+function modalView(win: boolean, minT: number, secT: number) {
+    clearTimeout(timerId);
+
+    const pngResult = document.createElement('img');
+    pngResult.classList.add('png-result', 'modal-chld');
+
+    const result = document.createElement('p');
+    result.classList.add('text', 'text-del', 'modal-chld');
+
+    const textTime = document.createElement('p');
+    textTime.textContent = 'Затраченное время:';
+    textTime.classList.add('text-time', 'modal-chld');
+
+    const timeModal = document.createElement('p');
+    timeModal.textContent =
+        win == true ? String(minT + '.' + secT) : String(minT + '.0' + secT);
+    timeModal.classList.add('time-final', 'modal-chld');
+
+    btnRestartModal.classList.add('btn-start', 'modal-chld');
+    btnRestartModal.textContent = 'Играть снова';
+
+    modal.append(pngResult, result, textTime, timeModal, btnRestartModal);
+    modal.classList.add('modal');
+    modal.style.display = 'flex';
+
+    if (win === true) {
+        pngResult.src = '../static/win.png';
+        result.textContent = 'Вы выиграли!';
+    } else {
+        pngResult.src = '../static/loser.png';
+        result.textContent = 'Вы проиграли!';
+    }
+}
+
+btnRestart.addEventListener('click', () => {
+    clearTimeout(timerId);
+    handleButtonClick(window.application.difficultyLevel);
+});
+
+btnRestartModal.addEventListener('click', () => {
+    document.querySelectorAll('.modal-chld').forEach((e) => e.remove());
+    clearTimeout(timerId);
+    handleButtonClick(window.application.difficultyLevel);
+});
