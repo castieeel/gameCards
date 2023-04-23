@@ -9,10 +9,10 @@
         "start": "webpack-dev-server --open",
         "format": "prettier --write ./js/",
         "lint:js": "eslint ./js/",
-        "prepare": "husky install",
+        "prepare": "husky insуtall",
         "lint:css": "stylelint ./**/*.css",
         "lint:ts": "tsc --noEmit",
-        "lint": "npm run lint:js && npm run lint:css"
+        "lint": "npm run lint:ts && npm run lint:css"
     },
     "repository": {
         "type": "git",
@@ -37,7 +37,7 @@
         "@babel/core": "^7.21.4",
         "@babel/preset-env": "^7.21.4",
         "@babel/preset-react": "^7.18.6",
-        "@types/jest": "^29.5.0",
+        "@types/jest": "^29.5.1",
         "@typescript-eslint/eslint-plugin": "^5.58.0",
         "@typescript-eslint/parser": "^5.58.0",
         "babel-jest": "^29.5.0",

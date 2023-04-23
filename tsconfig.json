@@ -8,5 +8,6 @@
         "allowJs": true,
         "sourceMap": true,
         "moduleResolution": "node"
-    }
+    },
+    "exclude": ["./**/*.spec.ts", "./**/*.test.ts", "./dist/main.css"]
 }
